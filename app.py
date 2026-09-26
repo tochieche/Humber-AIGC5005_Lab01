@@ -1,3 +1,22 @@
+#Prompt the user for input and validate that it is a float within the specified sensible range [min_val, max_val].
+def get_positive_float(prompt, min_val, max_val, unit_name):
+    
+    user_input = input(prompt).strip()
+    
+    # Checks for non-numeric or empty input
+    try:
+        value = float(user_input)
+    except ValueError:
+        print(f"Invalid input: '{user_input}' is not a valid number.")
+        return None
+        
+    # Checks for out-of-range values
+    if value < min_val or value > max_val:
+        print(f"Value out of range: {value} {unit_name}. The sensible range is {min_val} to {max_val} {unit_name}.")
+        return None
+        
+    return value
+
 def main():
     print("--- Body Mass Index (BMI) Calculator ---\n")
     
@@ -33,7 +52,7 @@ def main():
     else:
         bmi_category = "Obesity"
 
-    # Print a formatted result
+    # Prints a formatted result
     print(f"\nResult: Your BMI is {body_mass_index:.1f}, which falls into the '{bmi_category}' category.")
 
 if __name__ == "__main__":
